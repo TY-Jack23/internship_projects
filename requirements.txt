@@ -1,0 +1,36 @@
+# =============================================================
+# 医养项目 - 统一依赖清单（数据清洗 + 大数据分析服务 + AI 智能层）
+# Python 版本要求：3.12（已用 Python 3.12.10 验证）
+# 安装：python -m pip install -r requirements.txt
+# =============================================================
+
+# ---- 数据清洗流水线（pandas 分块读写 210 万行 CSV）----
+pandas>=2.0
+
+# ---- Python 3.12 兼容包（PySpark 3.5 仍依赖 distutils）----
+setuptools>=60
+
+# ---- Web 服务层 ----
+Flask==3.1.3
+marshmallow==4.3.1
+python-dotenv==1.2.2
+
+# ---- 大数据计算引擎 ----
+# Spark 3.5.1 官方支持 Python 3.8~3.12，兼容 Java 8/11/17
+pyspark==3.5.1
+
+# ---- AI 智能层（人员4：意图识别 / 文本生成）----
+# 通过 OpenAI 兼容协议接入 DeepSeek（base_url=https://api.deepseek.com/v1）
+# 也兼容 OpenAI / Azure / 本地 vLLM 等 OpenAI 兼容端点
+openai>=1.30
+
+# ---- AI 应用编排（人员1：LangChain Tool / Redis 会话）----
+# 业务代码在未安装时仍可用本地工具/内存会话，生产环境建议安装并启用 Redis。
+langchain-core>=0.3,<2.0
+redis>=5.0,<7.0
+
+# ---- 生产部署（可选，Linux 服务器上使用）----
+# gunicorn==23.0.0
+
+# ---- 测试 ----
+pytest==9.1.1
